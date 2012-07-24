@@ -1,0 +1,95 @@
+<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Analytics Block
+ *
+ * @package    blocks
+ * @subpackage analytics
+ * @copyright  2012 NetSpot Pty Ltd
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+/**
+ * Analytics block class
+ *
+ * @package    blocks
+ * @copyright  2012 NetSpot Pty Ltd
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class block_analytics extends block_base {
+
+    /**
+     * Set the initial properties for the block
+     */
+    function init() {
+        global $CFG;
+        $this->blockname = get_class($this);
+        $this->title = get_string('pluginname', $this->blockname);
+    }
+
+    /**
+     * All multiple instances of this block
+     * @return bool Returns true
+     */
+    function instance_allow_multiple() {
+        return false;
+    }
+
+    /**
+     * Set the applicable formats for this block to all
+     * @return array
+     */
+    function applicable_formats() {
+        return array('course' => true);
+    }
+
+    /**
+     * Allow the user to configure a block instance
+     * @return bool Returns true
+     */
+    function instance_allow_config() {
+        return true;
+    }
+
+    function  instance_can_be_hidden() {
+        return true;
+    }
+
+    function instance_can_be_docked() {
+        return (parent::instance_can_be_docked() && (empty($this->config->enabledock) || $this->config->enabledock=='yes'));
+    }
+
+    /**
+     * Gets the content for this block by grabbing it from $this->page
+     */
+    function get_content() {
+        global $CFG, $DB, $COURSE;
+
+        if ($this->content !== NULL) {
+            return $this->content;
+        }
+
+        $risks = report_analytics_get_course_summary($COURSE->id);
+        $users = $DB->get_records_list('user', 'id', array_keys($risks), '', 'id, firstname, lastname');
+
+        // Grab the items to display
+        $this->content = new stdClass();
+        $renderer = $this->page->get_renderer('block_analytics');
+        $this->content->text = $renderer->user_risk_list($risks, $users);
+        return $this->content;
+    }
+}
