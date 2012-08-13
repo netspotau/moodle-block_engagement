@@ -17,25 +17,17 @@
 /**
  * Analytics Block
  *
- * @package    blocks
- * @subpackage analytics
+ * @package    blocks_analytics
  * @copyright  2012 NetSpot Pty Ltd
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-/**
- * Analytics block class
- *
- * @package    blocks
- * @copyright  2012 NetSpot Pty Ltd
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
 class block_analytics extends block_base {
 
     /**
      * Set the initial properties for the block
      */
-    function init() {
+    public function init() {
         global $CFG;
         $this->blockname = get_class($this);
         $this->title = get_string('pluginname', $this->blockname);
@@ -45,7 +37,7 @@ class block_analytics extends block_base {
      * All multiple instances of this block
      * @return bool Returns true
      */
-    function instance_allow_multiple() {
+    public function instance_allow_multiple() {
         return false;
     }
 
@@ -53,7 +45,7 @@ class block_analytics extends block_base {
      * Set the applicable formats for this block to all
      * @return array
      */
-    function applicable_formats() {
+    public function applicable_formats() {
         return array('course' => true);
     }
 
@@ -61,32 +53,37 @@ class block_analytics extends block_base {
      * Allow the user to configure a block instance
      * @return bool Returns true
      */
-    function instance_allow_config() {
+    public function instance_allow_config() {
         return true;
     }
 
-    function  instance_can_be_hidden() {
+    public function  instance_can_be_hidden() {
         return true;
     }
 
-    function instance_can_be_docked() {
+    public function instance_can_be_docked() {
         return (parent::instance_can_be_docked() && (empty($this->config->enabledock) || $this->config->enabledock=='yes'));
     }
 
     /**
      * Gets the content for this block by grabbing it from $this->page
      */
-    function get_content() {
+    public function get_content() {
         global $CFG, $DB, $COURSE;
 
-        if ($this->content !== NULL) {
+        if ($this->content !== null) {
+            return $this->content;
+        }
+
+        if (!has_capability('report/analytics:view', $this->page->context)) {
+            $this->content = '';
             return $this->content;
         }
 
         $risks = report_analytics_get_course_summary($COURSE->id);
         $users = $DB->get_records_list('user', 'id', array_keys($risks), '', 'id, firstname, lastname');
 
-        // Grab the items to display
+        // Grab the items to display.
         $this->content = new stdClass();
         $renderer = $this->page->get_renderer('block_analytics');
         $this->content->text = $renderer->user_risk_list($risks, $users);

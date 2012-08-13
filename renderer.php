@@ -17,8 +17,7 @@
 /**
  * Output rendering of analytics block
  *
- * @package    blocks
- * @subpackage analtyics
+ * @package    blocks_analytics
  * @copyright  2012 NetSpot Pty Ltd
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -42,11 +41,11 @@ class block_analytics_renderer extends plugin_renderer_base {
         arsort($risks);
         $count = 0;
         foreach ($risks as $userid => $risk) {
-            if ($count >= 10) { //TODO: add a instance-level setting for this number
-                break; //only display top 10 at risk
+            if ($count >= 10) { // TODO: add a instance-level setting for this number.
+                break; // Only display top 10 at risk.
             }
             if (!isset($users[$userid])) {
-                continue; //user doesnt exist?
+                continue; // User doesnt exist?
             }
             $url = new moodle_url('/report/analytics/index.php', array('id' => $COURSE->id, 'userid' => $userid));
             $link = html_writer::link($url, "{$users[$userid]->firstname} {$users[$userid]->lastname}");
