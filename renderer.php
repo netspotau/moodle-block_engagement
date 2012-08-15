@@ -38,6 +38,8 @@ class block_analytics_renderer extends plugin_renderer_base {
         }
 
         $output = '';
+        $output .= html_writer::tag('span', get_string('subheading', 'block_analytics'));
+
         arsort($risks);
         $count = 0;
         foreach ($risks as $userid => $risk) {
