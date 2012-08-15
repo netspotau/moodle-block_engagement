@@ -23,5 +23,5 @@
  */
 
 $string['subheading'] = 'Name and the level of risk';
-$string['pluginname'] = 'Engagement engagement';
+$string['pluginname'] = 'Engagement analytics';
 $string['viewcoursereport'] = 'View course report';
