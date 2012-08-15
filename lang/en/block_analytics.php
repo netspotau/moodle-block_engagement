@@ -17,11 +17,11 @@
 /**
  * Strings
  *
- * @package    blocks_analytics
+ * @package    blocks_engagement
  * @copyright  NetSpot Pty Ltd
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 $string['subheading'] = 'Name and the level of risk';
-$string['pluginname'] = 'Engagement analytics';
+$string['pluginname'] = 'Engagement engagement';
 $string['viewcoursereport'] = 'View course report';

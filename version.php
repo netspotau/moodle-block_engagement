@@ -17,8 +17,7 @@
 /**
  * Version info
  *
- * @package    blocks
- * @subpackage analytics
+ * @package    blocks_engagement
  * @copyright  2012 NetSpot Pty Ltd
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -27,7 +26,7 @@ defined('MOODLE_INTERNAL') || die;
 
 $plugin->version   = 2012031500;       // The current plugin version (Date: YYYYMMDDXX)
 $plugin->requires  = 2011120500;       // Requires this Moodle version
-$plugin->component = 'block_analytics'; // Full name of the plugin (used for diagnostics).
-$plugin->dependencies = array('mod_analytics' => 2012031400, 'report_analytics' => 2012031300);
+$plugin->component = 'block_engagement'; // Full name of the plugin (used for diagnostics).
+$plugin->dependencies = array('mod_engagement' => 2012031400, 'report_engagement' => 2012031300);
 
 $plugin->maturity = MATURITY_STABLE;

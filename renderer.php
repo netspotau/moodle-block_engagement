@@ -15,21 +15,21 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Output rendering of analytics block
+ * Output rendering of engagement block
  *
- * @package    blocks_analytics
+ * @package    blocks_engagement
  * @copyright  2012 NetSpot Pty Ltd
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->dirroot . '/report/analytics/lib.php');
+require_once($CFG->dirroot . '/report/engagement/lib.php');
 
 /**
- * Rendering methods for the analytics reports
+ * Rendering methods for the engagement reports
  */
-class block_analytics_renderer extends plugin_renderer_base {
+class block_engagement_renderer extends plugin_renderer_base {
 
     public function user_risk_list($risks, $users) {
         global $COURSE;
@@ -38,7 +38,7 @@ class block_analytics_renderer extends plugin_renderer_base {
         }
 
         $output = '';
-        $output .= html_writer::tag('span', get_string('subheading', 'block_analytics'));
+        $output .= html_writer::tag('span', get_string('subheading', 'block_engagement'));
 
         arsort($risks);
         $count = 0;
@@ -49,10 +49,10 @@ class block_analytics_renderer extends plugin_renderer_base {
             if (!isset($users[$userid])) {
                 continue; // User doesnt exist?
             }
-            $url = new moodle_url('/report/analytics/index.php', array('id' => $COURSE->id, 'userid' => $userid));
+            $url = new moodle_url('/report/engagement/index.php', array('id' => $COURSE->id, 'userid' => $userid));
             $link = html_writer::link($url, "{$users[$userid]->firstname} {$users[$userid]->lastname}");
             $display_value = sprintf("%.0f%%", 100 * $risk);
-            $level = report_analytics_get_risk_level($risk);
+            $level = report_engagement_get_risk_level($risk);
             $output .= html_writer::start_tag('div', array('class' => 'risk-row risk-level-'.$level));
             $output .= html_writer::tag('div', null, array('class' => 'trafficlight'));
             $output .= "&nbsp;$link $display_value";
@@ -60,9 +60,9 @@ class block_analytics_renderer extends plugin_renderer_base {
             $count++;
         }
         $output .= html_writer::empty_tag('br');
-        $url = new moodle_url('/report/analytics/index.php', array('id' => $COURSE->id));
+        $url = new moodle_url('/report/engagement/index.php', array('id' => $COURSE->id));
         $output .= html_writer::start_tag('div', array('class' => 'coursereportlink'));
-        $output .= html_writer::link($url, get_string('viewcoursereport', 'block_analytics'));
+        $output .= html_writer::link($url, get_string('viewcoursereport', 'block_engagement'));
         $output .= html_writer::end_tag('div');
 
         return $output;
