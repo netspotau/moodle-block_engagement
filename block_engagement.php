@@ -80,7 +80,7 @@ class block_engagement extends block_base {
             return $this->content;
         }
 
-        $risks = report_engagement_get_course_summary($COURSE->id);
+        $risks = coursereport_engagement_get_course_summary($COURSE->id);
         $users = $DB->get_records_list('user', 'id', array_keys($risks), '', 'id, firstname, lastname');
 
         // Grab the items to display.

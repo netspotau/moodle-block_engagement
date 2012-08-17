@@ -10,21 +10,21 @@
 }
 
 .block_engagement .risk-level-0 .trafficlight {
-    background: url([[pix:report_engagement|trafficlight]]) 0 0 no-repeat;
+    background: url([[pix:coursereport_engagement|trafficlight]]) 0 0 no-repeat;
 }
 
 .block_engagement .risk-level-1 .trafficlight {
-    background: url([[pix:report_engagement|trafficlight]]) 0 -14px no-repeat;
+    background: url([[pix:coursereport_engagement|trafficlight]]) 0 -14px no-repeat;
 }
 
 .block_engagement .risk-level-2 .trafficlight {
-    background: url([[pix:report_engagement|trafficlight]]) 0 -28px no-repeat;
+    background: url([[pix:coursereport_engagement|trafficlight]]) 0 -28px no-repeat;
 }
 
 .block_engagement .risk-level-3 .trafficlight {
-    background: url([[pix:report_engagement|trafficlight]]) 0 -42px no-repeat;
+    background: url([[pix:coursereport_engagement|trafficlight]]) 0 -42px no-repeat;
 }
 
 .block_engagement .risk-level-4 .trafficlight {
-    background: url([[pix:report_engagement|trafficlight]]) 0 -56px no-repeat;
+    background: url([[pix:coursereport_engagement|trafficlight]]) 0 -56px no-repeat;
 }
