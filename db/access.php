@@ -14,15 +14,18 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Strings
- *
- * @package    blocks_engagement
- * @copyright  NetSpot Pty Ltd
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+defined('MOODLE_INTERNAL') || die();
 
-$string['engagement:addinstance'] = 'Add an engagement block';
-$string['subheading'] = 'Name and the level of risk';
-$string['pluginname'] = 'Engagement analytics';
-$string['viewcoursereport'] = 'View course report';
+$capabilities = array(
+
+    'block/engagement:addinstance' => array(
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_BLOCK,
+        'archetypes' => array(
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        ),
+
+        'clonepermissionsfrom' => 'moodle/site:manageblocks'
+    ),
+);

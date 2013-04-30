@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -15,14 +16,16 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings
  *
- * @package    blocks_engagement
- * @copyright  NetSpot Pty Ltd
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @param int $oldversion
+ * @param object $block
  */
+function xmldb_block_engagement_upgrade($oldversion) {
+    global $CFG, $DB;
 
-$string['engagement:addinstance'] = 'Add an engagement block';
-$string['subheading'] = 'Name and the level of risk';
-$string['pluginname'] = 'Engagement analytics';
-$string['viewcoursereport'] = 'View course report';
+    // Moodle v2.4.0 release upgrade line
+    // Put any upgrade step following this
+
+
+    return true;
+}
