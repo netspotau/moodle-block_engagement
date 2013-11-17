@@ -80,12 +80,13 @@ class block_engagement extends block_base {
             return $this->content;
         }
 
+        $renderer = $this->page->get_renderer('block_engagement');
+
         $risks = report_engagement_get_course_summary($COURSE->id);
         $users = $DB->get_records_list('user', 'id', array_keys($risks), '', 'id, firstname, lastname');
 
         // Grab the items to display.
         $this->content = new stdClass();
-        $renderer = $this->page->get_renderer('block_engagement');
         $this->content->text = $renderer->user_risk_list($risks, $users);
         return $this->content;
     }
