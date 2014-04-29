@@ -80,6 +80,8 @@ class block_engagement extends block_base {
             return $this->content;
         }
 
+        require_once($CFG->dirroot . '/report/engagement/lib.php');
+
         $risks = report_engagement_get_course_summary($COURSE->id);
         $users = $DB->get_records_list('user', 'id', array_keys($risks), '', 'id, firstname, lastname');
 

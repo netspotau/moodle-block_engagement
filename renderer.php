@@ -24,21 +24,21 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->dirroot . '/report/engagement/lib.php');
-
 /**
  * Rendering methods for the engagement reports
  */
 class block_engagement_renderer extends plugin_renderer_base {
 
     public function user_risk_list($risks, $users) {
-        global $COURSE;
+        global $COURSE, $CFG;
         if (empty($risks)) {
             return '';
         }
 
         $output = '';
         $output .= html_writer::tag('span', get_string('subheading', 'block_engagement'));
+
+        require_once($CFG->dirroot . '/report/engagement/lib.php');
 
         arsort($risks);
         $count = 0;
